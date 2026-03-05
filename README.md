@@ -1,34 +1,39 @@
-# BandSync 🎺
+Minha Filarmónica 🎺
 
-**BandSync** é uma aplicação mobile criada para modernizar a gestão de filarmónicas e bandas musicais. A plataforma permite organizar festas, eventos e presenças dos músicos de forma simples, rápida e centralizada.
+Minha Filarmónica é a aplicação mobile pensada para modernizar a gestão de filarmónicas e bandas musicais em Portugal. A plataforma permite organizar festas, eventos e presenças dos músicos de forma simples, rápida e centralizada.
 
-Com o BandSync, administradores podem criar e gerir eventos, enquanto os músicos conseguem consultar as próximas atuações e confirmar a sua presença diretamente através da aplicação.
+Com Minha Filarmónica, os administradores podem criar e gerir eventos, enquanto os músicos consultam as próximas atuações e confirmam a sua presença diretamente através da app.
 
-## Principais funcionalidades
+Principais funcionalidades
 
-* 📅 Gestão de festas e eventos
-* 👥 Lista de músicos e confirmação de presença
-* 📍 Informação detalhada sobre cada saída (data, local, descrição)
-* 🔔 Notificações e comunicação rápida com os membros da banda
-* 📊 Controlo de presenças para organização eficiente
+📅 Gestão de festas e eventos
 
-## Objetivo
+👥 Lista de músicos e confirmação de presença
 
-O objetivo do BandSync é digitalizar e simplificar a organização das filarmónicas, substituindo métodos tradicionais como mensagens dispersas ou folhas de presença, por uma solução moderna e acessível em qualquer dispositivo móvel.
+📍 Informação detalhada sobre cada saída (data, local, descrição)
 
-## Tecnologias utilizadas
+🔔 Notificações e comunicação rápida com os membros da banda
 
-* **Frontend:** React Native
-* **Backend:** Node.js + Express
-* **Base de dados:** PostgreSQL
+📊 Controlo de presenças para uma organização eficiente
 
-## Público-alvo
+Objetivo
 
-* Filarmónicas
-* Bandas musicais
-* Associações culturais
-* Grupos musicais que participam regularmente em eventos e procissões
+Digitalizar e simplificar a organização das filarmónicas, substituindo métodos tradicionais como mensagens dispersas ou folhas de presença por uma solução moderna e acessível em qualquer dispositivo móvel.
 
----
+Tecnologias utilizadas
 
-BandSync foi pensado para aproximar músicos, facilitar a comunicação e garantir uma gestão mais eficiente das atividades da banda.
+Frontend: React Native
+
+Backend: Node.js + Express
+
+Base de dados: PostgreSQL
+
+Público-alvo
+
+Filarmónicas
+
+Bandas musicais
+
+Associações culturais
+
+Grupos musicais que participam regularmente em eventos e procissões
