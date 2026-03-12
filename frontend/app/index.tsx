@@ -1,69 +1,27 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { useState, useEffect } from 'react';
-import Dashboard from '@/components/Dashboard';
-import { getEventos } from '@/services/eventos';
-import { Evento } from '@/types';
+import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
+import { View, ActivityIndicator } from 'react-native';
+import { getStoredToken } from '../services/api';
 
 export default function Index() {
-  const [ensaios, setEnsaios] = useState<Evento[]>([]);
-  const [saidas, setSaidas] = useState<Evento[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    loadData();
+    checkAuth();
   }, []);
 
-  function loadData() {
-    setLoading(true);
-    getEventos()
-      .then(data => {
-        setEnsaios(data.ensaios);
-        setSaidas(data.saidas);
-        setLoading(false);
-        setRefreshing(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setRefreshing(false);
-      });
-  }
-
-  function onRefresh() {
-    setRefreshing(true);
-    loadData();
-  }
-
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
-        <Text style={styles.loadingText}>A carregar eventos...</Text>
-      </View>
-    );
-  }
+  const checkAuth = async () => {
+    const token = await getStoredToken();
+    if (token) {
+      router.replace('/(tabs)');
+    } else {
+      router.replace('/login');
+    }
+  };
 
   return (
-    <Dashboard 
-      ensaios={ensaios} 
-      saidas={saidas} 
-      loading={loading}
-      refreshing={refreshing}
-      onRefresh={onRefresh}
-    />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+      <ActivityIndicator size="large" color="#007AFF" />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  loadingText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#666',
-  },
-});
