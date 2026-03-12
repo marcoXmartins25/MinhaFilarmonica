@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { eventoService, presencaService, getStoredUser, User } from '../services/api';
-import { Evento, TipoEvento } from '../types';
+import { eventoService, presencaService, getStoredUser, User } from '../../services/api';
+import { Evento, TipoEvento } from '../../types';
 
 interface EventoCardProps {
   evento: Evento;

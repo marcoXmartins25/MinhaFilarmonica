@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { authService, saveAuthData } from '../services/api';
-import { UserRole } from '../types';
+import { authService, saveAuthData } from './services/api';
+import { UserRole } from './types';
 
 const ROLES: { value: UserRole; label: string; desc: string }[] = [
   { value: 'musico', label: 'Músico', desc: 'Pode ver eventos e marcar presença' },
