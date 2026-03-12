@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd frontend:*)",
+      "Bash(tasklist | findstr -i \"node\" && echo \"---\" && netstat -an | findstr \"8081\")",
+      "Bash(taskkill /F /IM node.exe 2>nul && echo \"Node processes terminated\" && timeout /t 2 >nul)",
+      "Bash(cd backend:*)"
+    ]
+  }
+}
