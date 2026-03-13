@@ -18,10 +18,16 @@ export default function LoginScreen() {
 
     setLoading(true);
     try {
+      console.log('Fazendo login...');
       const response = await authService.login(email, password);
+      console.log('Login bem sucedido:', response.user);
+      
       await saveAuthData(response.access_token, response.user);
+      console.log('Dados guardados');
+      
       router.replace('/(tabs)');
     } catch (error) {
+      console.log('Erro login:', error);
       Alert.alert('Erro', error.message || 'Credenciais inválidas');
     } finally {
       setLoading(false);
