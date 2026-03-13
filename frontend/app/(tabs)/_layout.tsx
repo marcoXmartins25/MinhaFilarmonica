@@ -5,6 +5,7 @@ import { getStoredUser, User } from '../../types';
 import { getStoredToken } from '../../services/api';
 import { useRouter } from 'expo-router';
 import { View, ActivityIndicator } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 export default function TabLayout() {
   const router = useRouter();

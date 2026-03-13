@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 const API_BASE_URL = 'http://192.168.0.197:8000/api';
 
 const getHeaders = async () => {
-  const token = await AsyncStorage.getItem('token');
+  const token = await SecureStore.getItemAsync('token');
   return {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -60,8 +60,8 @@ export const authService = {
       method: 'POST',
       headers: await getHeaders(),
     });
-    await AsyncStorage.removeItem('token');
-    await AsyncStorage.removeItem('user');
+    await SecureStore.deleteItemAsync('token');
+    await SecureStore.deleteItemAsync('user');
     return response.json();
   },
 
@@ -72,7 +72,7 @@ export const authService = {
     });
     if (response.ok) {
       const data = await response.json();
-      await AsyncStorage.setItem('token', data.access_token);
+      await SecureStore.setItemAsync('token', data.access_token);
     }
     return response.json();
   },
@@ -190,22 +190,22 @@ export const presencaService = {
 };
 
 export const saveAuthData = async (token: string, user: any) => {
-  await AsyncStorage.setItem('token', token);
-  await AsyncStorage.setItem('user', JSON.stringify(user));
+  await SecureStore.setItemAsync('token', token);
+  await SecureStore.setItemAsync('user', JSON.stringify(user));
 };
 
 export const clearAuthData = async () => {
-  await AsyncStorage.removeItem('token');
-  await AsyncStorage.removeItem('user');
+  await SecureStore.deleteItemAsync('token');
+  await SecureStore.deleteItemAsync('user');
 };
 
 export const getStoredUser = async (): Promise<any> => {
-  const userStr = await AsyncStorage.getItem('user');
+  const userStr = await SecureStore.getItemAsync('user');
   return userStr ? JSON.parse(userStr) : null;
 };
 
 export const getStoredToken = async (): Promise<string | null> => {
-  return AsyncStorage.getItem('token');
+  return await SecureStore.getItemAsync('token');
 };
 
 export default API_BASE_URL;

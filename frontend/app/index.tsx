@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { View, ActivityIndicator, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -14,13 +13,7 @@ export default function Index() {
 
   const checkAuth = async () => {
     try {
-      // Timeout para evitar espera infinita
-      const tokenPromise = AsyncStorage.getItem('token');
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Timeout')), 3000)
-      );
-      
-      const token = await Promise.race([tokenPromise, timeoutPromise]);
+      const token = await SecureStore.getItemAsync('token');
       
       if (token) {
         router.replace('/(tabs)');
