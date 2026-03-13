@@ -1,8 +1,8 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { getStoredUser, User } from '../src/types';
-import { getStoredToken } from '../src/services/api';
+import { getStoredUser, User } from '@/types';
+import { getStoredToken } from '@/services/api';
 import { useRouter } from 'expo-router';
 import { View, ActivityIndicator } from 'react-native';
 

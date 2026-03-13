@@ -175,4 +175,23 @@ export const presencaService = {
   },
 };
 
+export const saveAuthData = async (token: string, user: any) => {
+  await AsyncStorage.setItem('token', token);
+  await AsyncStorage.setItem('user', JSON.stringify(user));
+};
+
+export const clearAuthData = async () => {
+  await AsyncStorage.removeItem('token');
+  await AsyncStorage.removeItem('user');
+};
+
+export const getStoredUser = async (): Promise<any> => {
+  const userStr = await AsyncStorage.getItem('user');
+  return userStr ? JSON.parse(userStr) : null;
+};
+
+export const getStoredToken = async (): Promise<string | null> => {
+  return AsyncStorage.getItem('token');
+};
+
 export default API_BASE_URL;

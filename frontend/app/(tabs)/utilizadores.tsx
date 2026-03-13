@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
-import { userService } from '../src/services/api';
-import { User, UserRole } from '../src/types';
+import { userService } from '@/services/api';
+import { User, UserRole } from '@/types';
 
 const ROLE_LABELS: Record<UserRole, string> = {
   admin: 'Admin',
