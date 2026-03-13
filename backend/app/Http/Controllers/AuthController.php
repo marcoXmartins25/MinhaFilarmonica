@@ -10,9 +10,11 @@ use Validator;
 
 class AuthController extends Controller
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        return [
+            'auth' => 'auth:api',
+        ];
     }
 
     public function register(Request $request)

@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class EventoController extends Controller
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('auth:api');
+        return [
+            'auth' => 'auth:api',
+        ];
     }
 
     public function index()
