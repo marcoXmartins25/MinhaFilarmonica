@@ -1,11 +1,10 @@
-import { Tabs } from 'expo-router';
+import { Tabs, Redirect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { getStoredUser, User } from '../../types';
 import { getStoredToken } from '../../services/api';
 import { useRouter } from 'expo-router';
 import { View, ActivityIndicator } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
 
 export default function TabLayout() {
   const router = useRouter();
@@ -64,36 +63,47 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Eventos',
-          tabBarLabel: 'Eventos',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar" size={size} color={color} />
           ),
-          headerTitle: `Minha Filarmónica - ${user?.nome || ''}`,
+          headerTitle: 'Eventos',
         }}
       />
       
-      {canCreateEventos && (
+      {canCreateEventos ? (
         <Tabs.Screen
           name="criar"
           options={{
-            title: 'Criar Evento',
-            tabBarLabel: 'Criar',
+            title: 'Criar',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="add-circle" size={size} color={color} />
             ),
           }}
         />
+      ) : (
+        <Tabs.Screen
+          name="criar"
+          options={{
+            href: null,
+          }}
+        />
       )}
 
-      {isAdmin && (
+      {isAdmin ? (
         <Tabs.Screen
           name="utilizadores"
           options={{
-            title: 'Utilizadores',
-            tabBarLabel: 'Utilizadores',
+            title: 'Users',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="people" size={size} color={color} />
             ),
+          }}
+        />
+      ) : (
+        <Tabs.Screen
+          name="utilizadores"
+          options={{
+            href: null,
           }}
         />
       )}
@@ -102,11 +112,9 @@ export default function TabLayout() {
         name="perfil"
         options={{
           title: 'Perfil',
-          tabBarLabel: 'Perfil',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
-          headerTitle: 'O Meu Perfil',
         }}
       />
     </Tabs>
