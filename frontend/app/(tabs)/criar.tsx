@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { eventoService } from '@/services/api';
-import { TipoEvento } from '@/types';
+import { eventoService } from '../../services/api';
+import { TipoEvento } from '../../types';
 
 const TIPOS: { value: TipoEvento; label: string }[] = [
   { value: 'ensaio', label: 'Ensaio' },

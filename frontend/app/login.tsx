@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { authService, saveAuthData } from '@/services/api';
-import { UserRole } from '@/types';
+import { authService, saveAuthData } from '../services/api';
+import { UserRole } from '../types';
 
 export default function LoginScreen() {
   const router = useRouter();

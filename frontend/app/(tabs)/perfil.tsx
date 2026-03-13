@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { authService, clearAuthData, getStoredUser, User } from '@/services/api';
+import { authService, clearAuthData, getStoredUser, User } from '../../services/api';
 
 const ROLE_LABELS = {
   admin: 'Administrador',
