@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
-import { View, ActivityIndicator, Text } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
+import { View, ActivityIndicator, Text, Platform } from 'react-native';
+
+let SecureStore;
+if (Platform.OS !== 'web') {
+  SecureStore = require('expo-secure-store');
+} else {
+  SecureStore = {
+    getItemAsync: async (key) => localStorage.getItem(key),
+    setItemAsync: async (key, value) => localStorage.setItem(key, value),
+    deleteItemAsync: async (key) => localStorage.removeItem(key),
+  };
+}
 
 export default function Index() {
   const router = useRouter();

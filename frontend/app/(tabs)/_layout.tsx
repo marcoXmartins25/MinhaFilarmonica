@@ -4,7 +4,16 @@ import { useEffect, useState } from 'react';
 import { getStoredUser, User } from '../../types';
 import { getStoredToken } from '../../services/api';
 import { useRouter } from 'expo-router';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Platform } from 'react-native';
+
+let SecureStore;
+if (Platform.OS !== 'web') {
+  SecureStore = require('expo-secure-store');
+} else {
+  SecureStore = {
+    getItemAsync: async (key) => localStorage.getItem(key),
+  };
+}
 
 export default function TabLayout() {
   const router = useRouter();
@@ -17,7 +26,7 @@ export default function TabLayout() {
 
   const checkAuth = async () => {
     try {
-      const token = await getStoredToken();
+      const token = await SecureStore.getItemAsync('token');
       const userData = await getStoredUser();
       
       if (!token || !userData) {

@@ -1,4 +1,21 @@
-import * as SecureStore from 'expo-secure-store';
+import { Platform } from 'react-native';
+
+let SecureStore;
+if (Platform.OS !== 'web') {
+  SecureStore = require('expo-secure-store');
+} else {
+  SecureStore = {
+    getItemAsync: async (key) => {
+      return localStorage.getItem(key);
+    },
+    setItemAsync: async (key, value) => {
+      localStorage.setItem(key, value);
+    },
+    deleteItemAsync: async (key) => {
+      localStorage.removeItem(key);
+    },
+  };
+}
 
 const API_BASE_URL = 'http://192.168.0.197:8000/api';
 
