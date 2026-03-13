@@ -39,7 +39,7 @@ export default function RegisterScreen() {
     try {
       const response = await authService.register(nome, email, password, role);
       await saveAuthData(response.access_token, response.user);
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/index');
     } catch (error) {
       Alert.alert('Erro', error.message || 'Erro ao criar conta');
     } finally {
