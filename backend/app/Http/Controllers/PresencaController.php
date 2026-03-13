@@ -7,6 +7,7 @@ use App\Models\Presenca;
 use App\Models\Evento;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PresencaController extends Controller
 {
@@ -19,7 +20,7 @@ class PresencaController extends Controller
 
     public function index(Request $request)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
 
         if ($user->role === 'musico') {
             $presencas = Presenca::where('user_id', $user->id)
@@ -37,7 +38,7 @@ class PresencaController extends Controller
 
     public function porEvento($eventoId)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
         $evento = Evento::findOrFail($eventoId);
 
         if ($user->role === 'musico') {
@@ -59,7 +60,7 @@ class PresencaController extends Controller
 
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
         $eventoId = $request->evento_id;
 
         $evento = Evento::findOrFail($eventoId);
@@ -83,7 +84,7 @@ class PresencaController extends Controller
 
     public function marcar(Request $request, $eventoId)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
 
         $validator = Validator::make($request->all(), [
             'status' => 'required|in:presente,ausente,justificado',
@@ -103,7 +104,7 @@ class PresencaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
 
         if (!in_array($user->role, ['admin', 'maestro'])) {
             return response()->json(['error' => 'Apenas administradores e maestros podem editar presenças'], 403);
@@ -126,7 +127,7 @@ class PresencaController extends Controller
 
     public function destroy($id)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
 
         if ($user->role !== 'admin') {
             return response()->json(['error' => 'Apenas administradores podem eliminar presenças'], 403);

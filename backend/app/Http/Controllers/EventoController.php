@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class EventoController extends Controller
 {
@@ -23,7 +24,7 @@ class EventoController extends Controller
 
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
         if (!in_array($user->role, ['admin', 'maestro'])) {
             return response()->json(['error' => 'Apenas administradores e maestros podem criar eventos'], 403);
         }
@@ -57,7 +58,7 @@ class EventoController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
         $evento = Evento::findOrFail($id);
 
         if ($user->role !== 'admin' && $user->role !== 'maestro') {
@@ -88,7 +89,7 @@ class EventoController extends Controller
 
     public function destroy($id)
     {
-        $user = auth()->user();
+        $user = JWTAuth::user();
         $evento = Evento::findOrFail($id);
 
         if ($user->role !== 'admin' && $user->role !== 'maestro') {

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        if (auth()->user()->role !== 'admin') {
+        if (JWTAuth::user()->role !== 'admin') {
             return response()->json(['error' => 'Apenas administradores podem criar utilizadores'], 403);
         }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (auth()->user()->role !== 'admin') {
+        if (JWTAuth::user()->role !== 'admin') {
             return response()->json(['error' => 'Apenas administradores podem editar utilizadores'], 403);
         }
 
@@ -83,7 +83,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        if (auth()->user()->role !== 'admin') {
+        if (JWTAuth::user()->role !== 'admin') {
             return response()->json(['error' => 'Apenas administradores podem eliminar utilizadores'], 403);
         }
 
